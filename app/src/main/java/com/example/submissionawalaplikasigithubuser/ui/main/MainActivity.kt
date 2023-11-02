@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,6 +19,8 @@ import retrofit2.Response
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private val userViewModel by viewModels<UserViewModel>()
+
     companion object {
         private const val TAG = "MainActivity"
         private const val USER_NAME = "syaddad"
@@ -27,13 +30,38 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         supportActionBar?.hide()
 
+        with(binding) {
+            searchView.setupWithSearchBar(searchBar)
+            searchView
+                .editText
+                .setOnEditorActionListener { _, _, _ ->
+                    searchBar.setText(searchView.text)
+                    searchView.hide()
+                    userViewModel.setReviewData(searchBar.text.toString())
+                    userViewModel.listUser.observe(this@MainActivity) {
+                        if (it.isNullOrEmpty()) {
+                            showNotFound(true)
+                        } else {
+                            showNotFound(false)
+                        }
+                    }
+                    false
+                }
+        }
+
+
         // berdasarkan warning tertulis Replace function call with indexed accessor. jadi saya menerapkan sarannya
-        val userVIewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[UserViewModel::class.java]
-        userVIewModel.listUser.observe(this) { restaurant ->
-            setReviewData(restaurant)
+        val userVIewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        )[UserViewModel::class.java]
+        userVIewModel.listUser.observe(this) {
+            setReviewData(it)
+        }
+        userVIewModel.isLoading.observe(this) {
+            showLoading(it)
         }
 
 
@@ -42,22 +70,15 @@ class MainActivity : AppCompatActivity() {
         val itemDecoration = DividerItemDecoration(this, layoutManager.orientation)
         binding.rvUsers.addItemDecoration(itemDecoration)
         findUser()
-
-        userVIewModel.listUser.observe(this) { consumerReviews ->
-            setReviewData(consumerReviews)
-        }
-        userVIewModel.isLoading.observe(this) {
-            showLoading(it)
-        }
     }
 
     private fun findUser() {
         showLoading(true)
-        val client =ApiConfig.ApiConfig.getApiService().getUser(USER_NAME)
+        val client = ApiConfig.getApiService().getUser(USER_NAME)
         client.enqueue(object : Callback<GithubResponse> {
             override fun onResponse(
                 call: Call<GithubResponse>,
-                response: Response<GithubResponse>
+                response: Response<GithubResponse>,
             ) {
                 showLoading(false)
                 if (response.isSuccessful) {
@@ -70,6 +91,7 @@ class MainActivity : AppCompatActivity() {
                     Log.e(TAG, "onFailure: ${response.message()}")
                 }
             }
+
             override fun onFailure(call: Call<GithubResponse>, t: Throwable) {
                 showLoading(false)
                 Log.e(TAG, "onFailure: ${t.message}")
@@ -81,9 +103,6 @@ class MainActivity : AppCompatActivity() {
         val adapter = UserAdapter()
         adapter.submitList(item)
         binding.rvUsers.adapter = adapter
-
-
-
     }
 
     private fun showLoading(isLoading: Boolean) {
@@ -91,6 +110,17 @@ class MainActivity : AppCompatActivity() {
             binding.progressBar.visibility = View.VISIBLE
         } else {
             binding.progressBar.visibility = View.GONE
+        }
+    }
+    private fun showNotFound(isDataNotFound: Boolean) {
+        binding.apply {
+            if (isDataNotFound) {
+                rvUsers.visibility = View.GONE
+                errorMessage.visibility = View.VISIBLE
+            } else {
+                rvUsers.visibility = View.VISIBLE
+                errorMessage.visibility = View.GONE
+            }
         }
     }
 }

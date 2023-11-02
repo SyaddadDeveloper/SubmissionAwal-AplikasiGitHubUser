@@ -20,16 +20,15 @@ class UserViewModel:ViewModel() {
 
     companion object{
         private const val TAG = "MainActivity"
-        private const val USER_NAME = "syaddad"
     }
 
     init {
-        setReviewData()
+        setReviewData("")
     }
 
-    private fun setReviewData() {
+    fun setReviewData(query: String) {
         _isLoading.value = true
-        val client = ApiConfig.ApiConfig.getApiService().getUser(USER_NAME)
+        val client = ApiConfig.getApiService().getUser(query)
         client.enqueue(object : Callback<GithubResponse> {
             override fun onResponse(
                 call: Call<GithubResponse>,

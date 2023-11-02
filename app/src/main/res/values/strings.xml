@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">SubmissionAwalAplikasiGitHubUser</string>
     <string name="github_username">Github username</string>
+
+    <string name="searchbar_hint">Masukkan kata</string>
+    <string name="error_message">User Not Found</string>
 </resources>
