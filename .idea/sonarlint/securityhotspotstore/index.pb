@@ -12,8 +12,6 @@ Yapp/src/main/java/com/example/submissionawalaplikasigithubuser/data/retrofit/Ap
 ä
 Zapp/src/main/java/com/example/submissionawalaplikasigithubuser/ui/detail/DetailActivity.kt,f\4\f419925d6c5c45278b31723286ec30c9ee2f168c
 Å
-Q.idea/sonarlint/securityhotspotstore/d/3/d32218173b2d721db89b85c3ff9789058278d829,9\a\9a81ead515b82bf6be00f5b6b877e5106d49d826
-Å
 Q.idea/sonarlint/securityhotspotstore/d/2/d2a4383452aad84a18429a5844d31330a012a9e6,7\f\7fcac164c7a46b8fc6411ea93226c884af6044db
 7
 gradlew,5\b\5bbfa66edb4db3c7c33c5181f43510990d3307f9
@@ -45,13 +43,9 @@ G.idea/sonarlint/issuestore/0/c/0c01b795bb9572ded5414c0629d85598c3c00a77,2\3\23
 C
 settings.gradle.kts,7\4\749edfcc96398253e5b3416184e95c46621da850
 Å
-Q.idea/sonarlint/securityhotspotstore/4/1/41d1aea3f31f24b59440527a45208da27c194f5f,f\f\ff159a352a5d5241c86acbdc429e85fa4def99ff
-Å
 Q.idea/sonarlint/securityhotspotstore/0/c/0c01b795bb9572ded5414c0629d85598c3c00a77,d\1\d1b0df32d5d2d817538c24780d3497b2a4007c29
 A
 gradle.properties,2\a\2afbb999f001938c88fa43fc2ef52abf0f8213e4
-w
-G.idea/sonarlint/issuestore/d/3/d32218173b2d721db89b85c3ff9789058278d829,d\0\d0a1168fa6219aa8a6e654906117d05b660d1eff
 Å
 Q.idea/sonarlint/securityhotspotstore/f/4/f419925d6c5c45278b31723286ec30c9ee2f168c,6\c\6c635e98cc8326a5f85ff6d4f0ef5e6d0e81aa37
 á
@@ -70,3 +64,7 @@ w
 G.idea/sonarlint/issuestore/4/0/40320da7cb6e1370125c82901f43730da2a1fbba,5\9\59e9f181415affdc43bcf81332946742e00116c1
 Ö
 Uapp/src/main/java/com/example/submissionawalaplikasigithubuser/ui/main/UserAdapter.kt,c\0\c0e1a850bc11dcbb21b880571e0b0aa73d514ba1
+í
+bapp/src/main/java/com/example/submissionawalaplikasigithubuser/data/response/DetailUserResponse.kt,1\d\1de1c5eded502e1ab432d615df98f73e09bf3fa9
+ã
+[app/src/main/java/com/example/submissionawalaplikasigithubuser/ui/detail/DetailViewModel.kt,f\e\fe8da2310b3ab63b1a8f4ce5e06d2764a72e3618
