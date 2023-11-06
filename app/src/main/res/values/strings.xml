@@ -10,4 +10,13 @@
     <string name="following">following</string>
     <string name="tv_following">123</string>
     <string name="tv_follower">123</string>
+
+
+    <string name="ini_fragment_following">ini fragment following</string>
+    <string name="ini_fragment_follower">ini fragment follower</string>
+    <string name="content_tab_text">This is Tab %1$d</string>
+    <string name="tab_text_1">Following</string>
+    <string name="tab_text_2">Follower</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

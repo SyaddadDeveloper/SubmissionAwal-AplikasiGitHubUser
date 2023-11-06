@@ -10,6 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiConfig {
     companion object {
+        private const val URL = BuildConfig.BASE_URL
         private const val TOKEN = BuildConfig.KEY
         fun getApiService(): ApiService {
             val loggingInterceptor = if (BuildConfig.DEBUG) {
@@ -30,7 +31,7 @@ class ApiConfig {
                 .addInterceptor(authInterceptor)
                 .build()
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://api.github.com/")
+                .baseUrl(URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()

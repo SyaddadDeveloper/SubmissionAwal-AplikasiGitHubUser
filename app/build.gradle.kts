@@ -44,6 +44,9 @@ android {
 
 dependencies {
 
+    //view Pager
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
+
     //view Model
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
     implementation("androidx.activity:activity-ktx:1.8.0")
