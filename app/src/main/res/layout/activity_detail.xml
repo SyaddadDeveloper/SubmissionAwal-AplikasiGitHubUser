@@ -11,6 +11,7 @@
         android:layout_height="wrap_content">
 
         <de.hdodenhof.circleimageview.CircleImageView
+
             android:id="@+id/img_user_photo"
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -50,9 +51,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="@string/follower"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tv_following"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/tv_following"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_user_name" />
 
         <TextView
@@ -61,21 +62,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_marginTop="20dp"
             android:text="@string/following"
-            app:layout_constraintEnd_toStartOf="@+id/tv_follower"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_user_name" />
+            app:layout_constraintStart_toEndOf="@+id/tv_follower"
+            app:layout_constraintTop_toTopOf="@+id/tv_follower" />
 
         <TextView
             android:id="@+id/tv_count_follower"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tv_follower"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/tv_following"
+            app:layout_constraintStart_toStartOf="@+id/tv_follower"
             app:layout_constraintTop_toBottomOf="@+id/tv_follower"
             tools:text="@string/tv_follower" />
 
@@ -86,10 +86,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_marginTop="5dp"
-            app:layout_constraintEnd_toStartOf="@+id/tv_follower"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tv_following"
+            app:layout_constraintStart_toStartOf="@+id/tv_following"
             app:layout_constraintTop_toBottomOf="@+id/tv_following"
             tools:text="@string/tv_following" />
 
@@ -106,14 +104,19 @@
             tools:visibility="visible" />
 
         <com.google.android.material.tabs.TabLayout
-            android:layout_marginTop="8dp"
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:background="?attr/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_count_following"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@color/white"
+            app:tabMaxWidth="0dp"
+            app:tabMode="fixed"
             app:tabTextColor="@android:color/white" />
 
         <androidx.viewpager2.widget.ViewPager2
@@ -124,9 +127,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tabs" />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </ScrollView>

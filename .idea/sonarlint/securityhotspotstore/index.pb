@@ -68,15 +68,9 @@ Uapp/src/main/java/com/example/submissionawalaplikasigithubuser/ui/main/UserAdap
 bapp/src/main/java/com/example/submissionawalaplikasigithubuser/data/response/DetailUserResponse.kt,1\d\1de1c5eded502e1ab432d615df98f73e09bf3fa9
 ã
 [app/src/main/java/com/example/submissionawalaplikasigithubuser/ui/detail/DetailViewModel.kt,f\e\fe8da2310b3ab63b1a8f4ce5e06d2764a72e3618
-Ä
-Papp/src/main/java/com/example/submissionawalaplikasigithubuser/DetailFragment.kt,b\1\b14d90cd3ac8989518db7cc89461c41ac49b0a76
-É
-Sapp/src/main/java/com/example/submissionawalaplikasigithubuser/FollowingFragment.kt,2\d\2ddb8f9c8a33950d61024476972daf944110c0ac
-ç
-]app/src/main/java/com/example/submissionawalaplikasigithubuser/ui/detail/FollowingFragment.kt,d\c\dc37c52302b546e9b2bd9d3e5c44db6c5c7619b5
-å
-\app/src/main/java/com/example/submissionawalaplikasigithubuser/ui/detail/FollowerFragment.kt,c\1\c1c986e3ec8257e81d78036b65f272be38c44c8d
 ê
 `app/src/main/java/com/example/submissionawalaplikasigithubuser/ui/detail/SectionsPagerAdapter.kt,a\9\a95c3de2f63004701c77fca0e1cf1623f878a3cb
 ä
 Zapp/src/main/java/com/example/submissionawalaplikasigithubuser/ui/detail/DetailFragment.kt,a\8\a8507005f755228bda9d0d2715e90c4a7aa4b0a9
+ç
+]app/src/main/java/com/example/submissionawalaplikasigithubuser/ui/detail/DetailUserAdapter.kt,7\9\794cd17d18100825c90d7e5697b38c4c6d483f27

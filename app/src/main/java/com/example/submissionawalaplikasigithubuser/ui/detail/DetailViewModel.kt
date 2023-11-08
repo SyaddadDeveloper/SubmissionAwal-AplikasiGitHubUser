@@ -26,8 +26,8 @@ class DetailViewModel : ViewModel() {
     val userFollowing: LiveData<List<ItemsItem>> = _userFollowing
 
     private var isloaded = false
-    var isfollowerloaded = false
-    var isfollowingloaded = false
+    private var isfollowerloaded = false
+    private var isfollowingloaded = false
 
     companion object {
         private const val TAG = "DetailViewModel"
@@ -56,6 +56,58 @@ class DetailViewModel : ViewModel() {
                 }
             })
             isloaded = true
+        }
+    }
+
+    fun getUserFollowing(username: String) {
+        if (!isfollowingloaded) {
+            _loadingScreen.value = true
+            val client = ApiConfig.getApiService().getUserFollowing(username)
+            client.enqueue(object : Callback<List<ItemsItem>> {
+                override fun onResponse(
+                    call: Call<List<ItemsItem>>,
+                    response: Response<List<ItemsItem>>
+                ) {
+                    _loadingScreen.value = false
+                    if (response.isSuccessful) {
+                        _userFollowing.postValue(response.body())
+                    } else {
+                        Log.e(TAG, "onFailure: ${response.message()}")
+                    }
+                }
+                override fun onFailure(call: Call<List<ItemsItem>>, t: Throwable) {
+                    _loadingScreen.value = false
+                    Log.e(TAG, "onFailure: ${t.message.toString()}")
+                }
+            })
+            isfollowingloaded = true
+        }
+    }
+
+    fun getUserFollower(username: String) {
+        if (!isfollowerloaded) {
+            _loadingScreen.value = true
+            val client = ApiConfig.getApiService().getUserFollowers(username)
+            client.enqueue(object : Callback<List<ItemsItem>> {
+                override fun onResponse(
+                    call: Call<List<ItemsItem>>,
+                    response: Response<List<ItemsItem>>
+                ) {
+                    _loadingScreen.value = false
+                    if (response.isSuccessful) {
+                        _userFollower.postValue(response.body())
+
+                    } else {
+                        Log.e(TAG, "onFailure: ${response.message()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<List<ItemsItem>>, t: Throwable) {
+                    _loadingScreen.value = false
+                    Log.e(TAG, "onFailure: ${t.message.toString()}")
+                }
+            })
+            isfollowerloaded = true
         }
     }
 }

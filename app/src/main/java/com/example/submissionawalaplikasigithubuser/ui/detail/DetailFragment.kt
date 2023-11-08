@@ -5,24 +5,74 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import com.example.submissionawalaplikasigithubuser.R
+import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.submissionawalaplikasigithubuser.databinding.FragmentDetailBinding
+
 
 class DetailFragment : Fragment() {
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detail, container, false)
+    private var position = 0
+    private var username: String = ""
+
+    private lateinit var binding: FragmentDetailBinding
+    private val detailViewModel: DetailViewModel by activityViewModels()
+
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View {
+        binding = FragmentDetailBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    companion object {
+        const val ARG_USERNAME = "0"
+        const val ARG_POSITION = "Syaddad"
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val tvLabel: TextView = view.findViewById(R.id.section_label)
-        val index = arguments?.getInt(ARG_SECTION_NUMBER, 0)
-        tvLabel.text = getString(R.string.content_tab_text, index)
+
+        arguments?.let {
+            position = it.getInt(ARG_POSITION)
+            username = it.getString(ARG_USERNAME) ?: "test"
+        }
+
+
+        detailViewModel.getUserFollowing(username)
+        detailViewModel.getUserFollower(username)
+
+        val layoutManager = LinearLayoutManager(requireActivity())
+        binding.rvFragment.layoutManager = layoutManager
+
+        detailViewModel.loading.observe(viewLifecycleOwner) {
+            showLoading(it)
+        }
+        if (position == 1) {
+            detailViewModel.userFollower.observe(viewLifecycleOwner) {
+                val adapter = DetailUserAdapter()
+                adapter.submitList(it)
+                binding.rvFragment.adapter = adapter
+            }
+        } else {
+            detailViewModel.userFollowing.observe(viewLifecycleOwner) {
+                val adapter = DetailUserAdapter()
+                adapter.submitList(it)
+                binding.rvFragment.adapter = adapter
+            }
+        }
     }
 
-    companion object {
-        const val ARG_SECTION_NUMBER = "section_number"
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.apply {
+            if (isLoading) {
+                progressBarFollow.visibility = View.VISIBLE
+            } else {
+                progressBarFollow.visibility = View.GONE
+            }
+        }
     }
 }

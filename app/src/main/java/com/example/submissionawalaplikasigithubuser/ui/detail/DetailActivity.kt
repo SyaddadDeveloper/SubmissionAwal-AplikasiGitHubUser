@@ -1,12 +1,12 @@
 package com.example.submissionawalaplikasigithubuser.ui.detail
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.annotation.StringRes
 import androidx.viewpager2.widget.ViewPager2
-
 import com.bumptech.glide.Glide
 import com.example.submissionawalaplikasigithubuser.R
 import com.example.submissionawalaplikasigithubuser.databinding.ActivityDetailBinding
@@ -26,36 +26,22 @@ class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding
     private val detailViewModel by viewModels<DetailViewModel>()
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val username = intent.getStringExtra("USERNAME")
-
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-
+        val username = intent.getStringExtra("USERNAME")
         if (username != null) {
-
-            //persiapan untuk pager
-            val sectionPagerAdapter = SectionsPagerAdapter(this)
+            val sectionPagerAdapter = SectionsPagerAdapter(this,username)
             val viewPager: ViewPager2 = findViewById(R.id.view_pager)
             viewPager.adapter = sectionPagerAdapter
             val tabs: TabLayout = findViewById(R.id.tabs)
             TabLayoutMediator(tabs, viewPager) { tab, position ->
                 tab.text = resources.getString(TAB_TITLES[position])
             }.attach()
-
-
-
-//            val sectionPagerAdapter = SectionPagerAdapter(this, username)
-//            val viewPager: ViewPager2 = findViewById(R.id.view_pager)
-//            viewPager.adapter = sectionPagerAdapter
-//            val tabs: TabLayout = findViewById(R.id.tabs)
-//            TabLayoutMediator(tabs, viewPager) { tab, position ->
-//                tab.text = resources.getString(TAB_TITLES[position])
-//            }.attach()
+            supportActionBar?.elevation = 0f
         }
         if (username != null) {
             detailViewModel.getDetailUser(username)
